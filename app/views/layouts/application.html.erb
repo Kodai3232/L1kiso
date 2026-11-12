@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "L1kiso" %></title>
+    <title><%= content_for(:title) || "タスク管理アプリ" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="L1kiso">
@@ -24,6 +24,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="app-header">
+      <div class="header-inner">
+        <h1><%= link_to "タスク管理アプリ", tasks_path %></h1>
+      </div>
+    </header>
+
+    <main class="container">
+      <% if notice %>
+        <div class="flash notice"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+        <div class="flash alert"><%= alert %></div>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>

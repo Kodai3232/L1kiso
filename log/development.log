@@ -16,3 +16,250 @@ Migrating to CreateTasks (20261029214508)
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='L1kiso'*/[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='L1kiso'*/[0m
 Using vips to process variants requires the libvips library. Please install libvips using the instructions on the libvips website.
+Started GET "/tasks" for ::1 at 2026-11-12 16:21:54 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='L1kiso'*/[0m
+  
+NameError (uninitialized constant ApplicationController):
+  
+app/controllers/application_controller.rb:2:in '<main>'
+app/controllers/tasks_controller.rb:1:in '<main>'
+Started GET "/tasks" for ::1 at 2026-11-12 16:23:23 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='L1kiso'*/[0m
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:7
+  Rendered tasks/index.html.erb within layouts/application (Duration: 16.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 101.9ms | GC: 0.2ms)
+Completed 200 OK in 533ms (Views: 129.7ms | ActiveRecord: 5.3ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/tasks/new" for ::1 at 2026-11-12 16:26:49 +0900
+Processing by TasksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 379.6ms | GC: 0.0ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 385.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 388.6ms | GC: 0.0ms)
+Completed 200 OK in 436ms (Views: 391.3ms | ActiveRecord: 1.4ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2026-11-12 16:26:52 +0900
+Processing by TasksController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "task" => {"title" => "", "description" => "", "due_date" => ""}, "commit" => "タスクを登録する"}
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 9.2ms | GC: 0.0ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 10.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 28ms (Views: 13.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/tasks" for ::1 at 2026-11-12 16:28:09 +0900
+Processing by TasksController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "task" => {"title" => "発展課題１", "description" => "発展課題に取り組む", "due_date" => "2026-11-12"}, "commit" => "タスクを登録する"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='create',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:17:in 'TasksController#create'
+  [1m[36mTask Create (8.2ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "created_at", "updated_at") VALUES ('発展課題１', '発展課題に取り組む', '2026-11-12', '2026-11-12 07:28:09.830102', '2026-11-12 07:28:09.830102') RETURNING "id" /*action='create',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:17:in 'TasksController#create'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='create',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:17:in 'TasksController#create'
+Redirected to http://localhost:3000/tasks/1
+↳ app/controllers/tasks_controller.rb:18:in 'TasksController#create'
+Completed 302 Found in 52ms (ActiveRecord: 11.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks/1" for ::1 at 2026-11-12 16:28:09 +0900
+Processing by TasksController#show as TURBO_STREAM
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='show',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 5.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.1ms | GC: 0.0ms)
+Completed 200 OK in 358ms (Views: 16.0ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks" for ::1 at 2026-11-12 16:29:05 +0900
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:7
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."due_date" ASC /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:17
+  Rendered tasks/index.html.erb within layouts/application (Duration: 23.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 32.4ms | GC: 0.0ms)
+Completed 200 OK in 62ms (Views: 36.9ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks/1" for ::1 at 2026-11-12 16:29:31 +0900
+Processing by TasksController#show as HTML
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='show',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 1.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.5ms | GC: 0.0ms)
+Completed 200 OK in 51ms (Views: 13.9ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/tasks" for ::1 at 2026-11-12 16:29:45 +0900
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:7
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."due_date" ASC /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:17
+  Rendered tasks/index.html.erb within layouts/application (Duration: 10.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.0ms | GC: 0.0ms)
+Completed 200 OK in 31ms (Views: 14.2ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks/1/edit" for ::1 at 2026-11-12 16:30:07 +0900
+Processing by TasksController#edit as HTML
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='edit',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 3.8ms | GC: 0.0ms)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 6.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | GC: 0.0ms)
+Completed 200 OK in 32ms (Views: 9.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks/1/edit" for ::1 at 2026-11-12 16:30:08 +0900
+Processing by TasksController#edit as HTML
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='edit',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 2.5ms | GC: 0.0ms)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 3.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | GC: 0.0ms)
+Completed 200 OK in 34ms (Views: 7.4ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/tasks/1" for ::1 at 2026-11-12 16:30:13 +0900
+Processing by TasksController#update as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "task" => {"title" => "発展課題１", "description" => "発展課題に取り組む", "due_date" => "2026-11-12"}, "commit" => "タスクを更新する", "id" => "1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='update',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+Redirected to http://localhost:3000/tasks/1
+↳ app/controllers/tasks_controller.rb:30:in 'TasksController#update'
+Completed 302 Found in 26ms (ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks/1" for ::1 at 2026-11-12 16:30:13 +0900
+Processing by TasksController#show as TURBO_STREAM
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='show',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.8ms | GC: 0.0ms)
+Completed 200 OK in 21ms (Views: 4.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks/1/edit" for ::1 at 2026-11-12 16:30:22 +0900
+Processing by TasksController#edit as HTML
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (0.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='edit',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 6.8ms | GC: 0.0ms)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 8.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | GC: 0.0ms)
+Completed 200 OK in 50ms (Views: 14.3ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/tasks/1" for ::1 at 2026-11-12 16:30:38 +0900
+Processing by TasksController#update as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "task" => {"title" => "発展課題１", "description" => "発展課題に取り組む\n動作確認をする", "due_date" => "2026-11-12"}, "commit" => "タスクを更新する", "id" => "1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='update',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='update',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:29:in 'TasksController#update'
+  [1m[36mTask Update (5.6ms)[0m  [1m[33mUPDATE "tasks" SET "description" = '発展課題に取り組む
+動作確認をする', "updated_at" = '2026-11-12 07:30:38.599922' WHERE "tasks"."id" = 1 /*action='update',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:29:in 'TasksController#update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='update',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:29:in 'TasksController#update'
+Redirected to http://localhost:3000/tasks/1
+↳ app/controllers/tasks_controller.rb:30:in 'TasksController#update'
+Completed 302 Found in 40ms (ActiveRecord: 6.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks/1" for ::1 at 2026-11-12 16:30:38 +0900
+Processing by TasksController#show as TURBO_STREAM
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='show',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | GC: 0.0ms)
+Completed 200 OK in 23ms (Views: 6.9ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks" for ::1 at 2026-11-12 16:31:19 +0900
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:7
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."due_date" ASC /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:17
+  Rendered tasks/index.html.erb within layouts/application (Duration: 12.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.7ms | GC: 0.0ms)
+Completed 200 OK in 37ms (Views: 15.4ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks" for ::1 at 2026-11-12 16:31:20 +0900
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:7
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."due_date" ASC /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:17
+  Rendered tasks/index.html.erb within layouts/application (Duration: 12.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 15.4ms | GC: 0.0ms)
+Completed 200 OK in 33ms (Views: 16.6ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/tasks/1?_method=delete" for ::1 at 2026-11-12 16:31:26 +0900
+Processing by TasksController#destroy as TURBO_STREAM
+  Parameters: {"id" => "1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = 1 LIMIT 1 /*action='destroy',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:45:in 'TasksController#set_task'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*action='destroy',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:38:in 'TasksController#destroy'
+  [1m[36mTask Destroy (6.6ms)[0m  [1m[31mDELETE FROM "tasks" WHERE "tasks"."id" = 1 /*action='destroy',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:38:in 'TasksController#destroy'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*action='destroy',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/controllers/tasks_controller.rb:38:in 'TasksController#destroy'
+Redirected to http://localhost:3000/tasks
+↳ app/controllers/tasks_controller.rb:39:in 'TasksController#destroy'
+Completed 303 See Other in 44ms (ActiveRecord: 7.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/tasks" for ::1 at 2026-11-12 16:31:26 +0900
+Processing by TasksController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT 1 /*action='index',application='L1kiso',controller='tasks'*/[0m
+  ↳ app/views/tasks/index.html.erb:7
+  Rendered tasks/index.html.erb within layouts/application (Duration: 4.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | GC: 0.0ms)
+Completed 200 OK in 30ms (Views: 9.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+

@@ -1,20 +1,31 @@
-<%= form_with(model: task) do |form| %>
-  <div>
-    <%= form.label :title, "タイトル" %>
-    <%= form.text_field :title %>
+<%= form_with(model: task, class: "task-form") do |form| %>
+  <% if task.errors.any? %>
+    <div class="error-messages">
+      <h3><%= task.errors.count %>件のエラーがあるため保存できませんでした：</h3>
+      <ul>
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title, "タイトル" %> <span class="required">必須</span>
+    <%= form.text_field :title, placeholder: "例：Rails発展課題の提出", class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description, "詳細内容" %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, "詳細内容" %> <span class="required">必須</span>
+    <%= form.text_area :description, rows: 5, placeholder: "タスクの具体的な内容を記入してください", class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :due_date, "期限" %>
-    <%= form.date_field :due_date %>
+  <div class="form-group">
+    <%= form.label :due_date, "期限" %> <span class="required">必須</span>
+    <%= form.date_field :due_date, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit task.new_record? ? "タスクを登録する" : "タスクを更新する", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(due_date: :asc)
   end
 
   def show
@@ -17,6 +17,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to @task, notice: "タスクを作成しました"
     else
+      flash.now[:alert] = "タスクの作成に失敗しました。入力内容を確認してください。"
       render :new, status: :unprocessable_entity
     end
   end
@@ -28,13 +29,14 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to @task, notice: "タスクを更新しました"
     else
+      flash.now[:alert] = "タスクの更新に失敗しました。入力内容を確認してください。"
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: "タスクを削除しました"
+    redirect_to tasks_url, notice: "タスクを削除しました", status: :see_other
   end
 
   private
